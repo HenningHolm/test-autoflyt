@@ -74,13 +74,13 @@ export default {
     border-bottom: 1px solid gray;
     border-top: 1px solid gray;
     border-right:1px solid gray;
-    background-color: rgb(48, 52, 70);
+    background: rgb(45, 48, 58);
 }
 
 .leftoption {
     height: 140px;
     width:  200px;
-    background-color: rgb(48, 52, 70);
+   background: rgb(45, 48, 58);
     border-bottom: 1px solid gray;
     border-right:1px solid gray;
 }

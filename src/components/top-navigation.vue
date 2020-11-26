@@ -19,7 +19,7 @@
         top:0px;
         height: 60px;    
         width: 100vw;
-        background: rgb(48, 52, 70);
+        background: rgb(45, 48, 58);
         overflow: hidden;
 
         border: 1px solid gray;   

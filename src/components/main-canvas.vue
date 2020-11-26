@@ -6,32 +6,14 @@
       :config="stageConfig"
       @wheel="resize"
     style="overflow: hidden">
-     <v-layer ref="layer2" id="lay2"
+      <v-layer ref="layer" id="lay"  :config="{
+            draggable: false,
+          }"
       @dragstart="handleDragstart"
       @dragend="handleDragend">
-        <!-- <v-rect
-          :config="{
-            x: -1500,
-            y: -1500,
-            height: 4000,
-            width: 6000, 
-            fillPatternImage: image,
-            opacity: 1,
-            shadowColor: 'black',
-            shadowBlur: 10,
-            shadowOpacity: 0.6,
-          }"
-        >   </v-rect> -->
-             <v-image :config="{
+       <v-image :config="{
             image: image
           }"/>
-      
-      
-       
-      </v-layer>
-      <v-layer ref="layer" id="lay"
-      @dragstart="handleDragstart"
-      @dragend="handleDragend">
         <v-rect
           v-for="item in list"
           :key="item.id"
@@ -60,8 +42,8 @@
 <script>
 
 import Konva from 'konva';
-const width = window.innerWidth;
-const height = window.innerHeight;
+// const width = window.innerWidth;
+// const height = window.innerHeight;
 
 export default {
     name: 'MainCanvas',
@@ -87,12 +69,14 @@ export default {
     handleDragstart(e) {
       // save drag element:
       this.dragItemId = e.target.id();
-      console.log(this.dragItemId)
+      console.log("e: ", e)
+      //console.log(this.dragItemId)
 
       // move current element to the top
       // the highter the index, the higher z-value
       const item = this.list.find(i => i.id === this.dragItemId);
       const index = this.list.indexOf(item);
+      console.log("item", item, "index", index)
       this.list.splice(index, 1);
       this.list.push(item); 
  
@@ -104,6 +88,7 @@ export default {
     ,
     resize(e){
     var stage = e.target.getStage(); 
+    console.log(stage);
     var stageXScale= stage.scaleX()- e.evt.deltaY/2000;
     var stageYScale= stage.scaleY()- e.evt.deltaY/2000;
     
@@ -128,8 +113,8 @@ export default {
     for (let n = 0; n < 30; n++) {
       this.list.push({
         id: Math.round(Math.random() * 10000).toString(),
-        x: Math.random() * width,
-        y: Math.random() * height,
+        x: Math.random() * 1000,
+        y: Math.random() * 1000,
        // rotation: Math.random() * 180,
        // scale: Math.random(),
         fill:"#"+((1<<24)*Math.random()|0).toString(16),
@@ -179,7 +164,7 @@ export default {
           mainLayer.add(image);
 
           image.position(mainStage.getPointerPosition());
-          image.draggable(true);
+          // image.draggable(true);
 
           console.log('mainLayeeer', mainLayer)
           mainLayer.draw();
@@ -219,13 +204,6 @@ export default {
 </script>
 
 <style>
-body {
-  margin: 0;
-  padding: 0;
-        background: linear-gradient(180deg, rgb(46, 46, 66) 0%, rgb(138, 177, 185) 100%);
-        /* background-color: rgb(70, 74, 97); */
 
-        
-}
 </style>
 
